@@ -117,7 +117,7 @@ function CreateBox(part)
 end
 
 function CreateCornerBox(part)
-    
+
     local BillboardGui = Instance.new("BillboardGui", StorageFolder)
     local Left = Instance.new("Frame")
     local TopLeft = Instance.new("Frame")
@@ -143,7 +143,7 @@ function CreateCornerBox(part)
     Left.BorderColor3 = Color3.fromRGB(0, 0, 0)
     Left.BorderSizePixel = 0
     Left.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
-    Left.Size = UDim2.new(0.00999999978, 0, 0.150000006, 0)
+    Left.Size = UDim2.new(0.0199999996, 0, 0.150000006, 0)
 
     TopLeft.Name = "TopLeft"
     TopLeft.Parent = BillboardGui
@@ -151,7 +151,7 @@ function CreateCornerBox(part)
     TopLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
     TopLeft.BorderSizePixel = 0
     TopLeft.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
-    TopLeft.Size = UDim2.new(0.200000003, 0, 0.00499999989, 0)
+    TopLeft.Size = UDim2.new(0.200000003, 0, 0.00999999978, 0)
 
     TopRight.Name = "TopRight"
     TopRight.Parent = BillboardGui
@@ -159,7 +159,7 @@ function CreateCornerBox(part)
     TopRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
     TopRight.BorderSizePixel = 0
     TopRight.Position = UDim2.new(0.600000024, 0, 0.0700000003, 0)
-    TopRight.Size = UDim2.new(0.200000003, 0, 0.00499999989, 0)
+    TopRight.Size = UDim2.new(0.200000003, 0, 0.00999999978, 0)
 
     Right.Name = "Right"
     Right.Parent = BillboardGui
@@ -167,7 +167,7 @@ function CreateCornerBox(part)
     Right.BorderColor3 = Color3.fromRGB(0, 0, 0)
     Right.BorderSizePixel = 0
     Right.Position = UDim2.new(0.800000012, 0, 0.0700000003, 0)
-    Right.Size = UDim2.new(0.00999999978, 0, 0.150000006, 0)
+    Right.Size = UDim2.new(0.0199999996, 0, 0.150000006, 0)
 
     BottomLeft.Name = "BottomLeft"
     BottomLeft.Parent = BillboardGui
@@ -175,15 +175,15 @@ function CreateCornerBox(part)
     BottomLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
     BottomLeft.BorderSizePixel = 0
     BottomLeft.Position = UDim2.new(0.200000003, 0, 0.699999988, 0)
-    BottomLeft.Size = UDim2.new(0.00999999978, 0, 0.150000006, 0)
+    BottomLeft.Size = UDim2.new(0.0199999996, 0, 0.150000006, 0)
 
     BottomBottomRight.Name = "BottomBottomRight"
     BottomBottomRight.Parent = BillboardGui
     BottomBottomRight.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     BottomBottomRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
     BottomBottomRight.BorderSizePixel = 0
-    BottomBottomRight.Position = UDim2.new(0.610000014, 0, 0.850000024, 0)
-    BottomBottomRight.Size = UDim2.new(0.200000003, 0, 0.00540000014, 0)
+    BottomBottomRight.Position = UDim2.new(0.620000005, 0, 0.850000024, 0)
+    BottomBottomRight.Size = UDim2.new(0.200000003, 0, 0.00999999978, 0)
 
     BottomBottomLeft.Name = "BottomBottomLeft"
     BottomBottomLeft.Parent = BillboardGui
@@ -191,7 +191,7 @@ function CreateCornerBox(part)
     BottomBottomLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
     BottomBottomLeft.BorderSizePixel = 0
     BottomBottomLeft.Position = UDim2.new(0.200000003, 0, 0.850000024, 0)
-    BottomBottomLeft.Size = UDim2.new(0.200000010, 0, 0.00540000014, 0)
+    BottomBottomLeft.Size = UDim2.new(0.200000003, 0, 0.00999999978, 0)
 
     BottomRight.Name = "BottomRight"
     BottomRight.Parent = BillboardGui
@@ -199,7 +199,7 @@ function CreateCornerBox(part)
     BottomRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
     BottomRight.BorderSizePixel = 0
     BottomRight.Position = UDim2.new(0.800000012, 0, 0.699999988, 0)
-    BottomRight.Size = UDim2.new(0.00999999980, 0, 0.150000006, 0)
+    BottomRight.Size = UDim2.new(0.0199999996, 0, 0.150000006, 0)
 
 end
 
@@ -556,7 +556,7 @@ MiscSection:AddSlider('ClockTime', {
 
 UserInputService.InputBegan:Connect(function(Key) -- start detecting input for our aimbot
     if Key[_G.FeatureTable.Combat.AimbotInputType] == _G.FeatureTable.Combat.AimbotBind then
-        if _G.FeatureTable.Combat.AimbotEnabled or _G.FeatureTable.Combat.SilentAim then
+        if _G.FeatureTable.Combat.AimbotEnabled then
             if _G.FeatureTable.Combat.Togglelock then
 
                 local ClosestPlayer = GetClosestPlayer()
