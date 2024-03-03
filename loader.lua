@@ -57,12 +57,7 @@ TextButton.TextSize = 14.000
 TextButton.TextWrapped = true
 TextButton.MouseButton1Click:Connect(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/dementiaenjoyer/eclipse.lol/main/universal.lua"))()
-    
-    game.CoreGui.ChildAdded:Connect(function(newgui)
-        if newgui:IsA("ScreenGui") then
-            EclipseLoader:Destroy()
-        end
-    end)
+	EclipseLoader:Destroy()
 end)
 
 UICorner_2.CornerRadius = UDim.new(0, 3)
