@@ -96,18 +96,11 @@ function CreateBox(part)
     BillboardGui.Adornee = part
 
     Frame.Parent = BillboardGui
-    Frame.BackgroundColor3 = _G.FeatureTable.Visuals.FilledColor
     Frame.BackgroundTransparency = 1.000
     Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
     Frame.BorderSizePixel = 0
     Frame.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
     Frame.Size = UDim2.new(0.699999988, 0, 0.800000012, 0)
-
-    if _G.FeatureTable.Visuals.FilledESP then
-        Frame.BackgroundTransparency = 0.5
-    else
-        Frame.BackgroundTransparency = 1
-    end
 
     local UIStroke = Instance.new("UIStroke", Frame)
     UIStroke.LineJoinMode = "Miter"
@@ -118,88 +111,112 @@ end
 
 function CreateCornerBox(part)
 
+	local BillboardGui = Instance.new("BillboardGui", StorageFolder)
+	local Left = Instance.new("Frame")
+	local TopLeft = Instance.new("Frame")
+	local TopRight = Instance.new("Frame")
+	local Right = Instance.new("Frame")
+	local BottomLeft = Instance.new("Frame")
+	local BottomBottomRight = Instance.new("Frame")
+	local BottomBottomLeft = Instance.new("Frame")
+	local BottomRight = Instance.new("Frame")
+
+	BillboardGui.Active = true
+	BillboardGui.Adornee = part
+	BillboardGui.AlwaysOnTop = true
+	BillboardGui.LightInfluence = 1.000
+	BillboardGui.Size = UDim2.new(4, 0, 7, 0)
+    BillboardGui.Name = "FpsBooster2"
+    BillboardGui.Enabled = _G.FeatureTable.Visuals.CornerESP
+
+	Left.Name = "Left"
+	Left.Parent = BillboardGui
+	Left.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
+	Left.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Left.BorderSizePixel = 0
+	Left.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
+	Left.Size = UDim2.new(0.0250000004, 0, 0.150000006, 0)
+
+	TopLeft.Name = "TopLeft"
+	TopLeft.Parent = BillboardGui
+	TopLeft.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
+	TopLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TopLeft.BorderSizePixel = 0
+	TopLeft.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
+	TopLeft.Size = UDim2.new(0.200000003, 0, 0.0149999997, 0)
+
+	TopRight.Name = "TopRight"
+	TopRight.Parent = BillboardGui
+	TopRight.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
+	TopRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TopRight.BorderSizePixel = 0
+	TopRight.Position = UDim2.new(0.600000024, 0, 0.0700000003, 0)
+	TopRight.Size = UDim2.new(0.200000003, 0, 0.0149999997, 0)
+
+	Right.Name = "Right"
+	Right.Parent = BillboardGui
+	Right.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
+	Right.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Right.BorderSizePixel = 0
+	Right.Position = UDim2.new(0.800000012, 0, 0.0700000003, 0)
+	Right.Size = UDim2.new(0.0250000004, 0, 0.150000006, 0)
+
+	BottomLeft.Name = "BottomLeft"
+	BottomLeft.Parent = BillboardGui
+	BottomLeft.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
+	BottomLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	BottomLeft.BorderSizePixel = 0
+	BottomLeft.Position = UDim2.new(0.200000003, 0, 0.699999988, 0)
+	BottomLeft.Size = UDim2.new(0.0250000004, 0, 0.150000006, 0)
+
+	BottomBottomRight.Name = "BottomBottomRight"
+	BottomBottomRight.Parent = BillboardGui
+	BottomBottomRight.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
+	BottomBottomRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	BottomBottomRight.BorderSizePixel = 0
+	BottomBottomRight.Position = UDim2.new(0.625, 0, 0.850000024, 0)
+	BottomBottomRight.Size = UDim2.new(0.200000003, 0, 0.0149999997, 0)
+
+	BottomBottomLeft.Name = "BottomBottomLeft"
+	BottomBottomLeft.Parent = BillboardGui
+	BottomBottomLeft.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
+	BottomBottomLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	BottomBottomLeft.BorderSizePixel = 0
+	BottomBottomLeft.Position = UDim2.new(0.200000003, 0, 0.850000024, 0)
+	BottomBottomLeft.Size = UDim2.new(0.200000003, 0, 0.0149999997, 0)
+
+	BottomRight.Name = "BottomRight"
+	BottomRight.Parent = BillboardGui
+	BottomRight.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
+	BottomRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	BottomRight.BorderSizePixel = 0
+	BottomRight.Position = UDim2.new(0.800000012, 0, 0.699999988, 0)
+	BottomRight.Size = UDim2.new(0.0250000004, 0, 0.150000006, 0)
+
+end
+
+function CreateFill(part)
+
     local BillboardGui = Instance.new("BillboardGui", StorageFolder)
-    local Left = Instance.new("Frame")
-    local TopLeft = Instance.new("Frame")
-    local TopRight = Instance.new("Frame")
-    local Right = Instance.new("Frame")
-    local BottomLeft = Instance.new("Frame")
-    local BottomBottomRight = Instance.new("Frame")
-    local BottomBottomLeft = Instance.new("Frame")
-    local BottomRight = Instance.new("Frame")
+    BillboardGui.Name = "FpsBooster3"
+    local Frame = Instance.new("Frame")
 
     BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    BillboardGui.Enabled = _G.FeatureTable.Visuals.FilledESP
     BillboardGui.Active = true
-    BillboardGui.Adornee = part
     BillboardGui.AlwaysOnTop = true
     BillboardGui.LightInfluence = 1.000
     BillboardGui.Size = UDim2.new(4, 0, 7, 0)
-    BillboardGui.Enabled = _G.FeatureTable.Visuals.CornerESP
-    BillboardGui.Name = "FpsBooster2"
+    BillboardGui.Adornee = part
 
-    Left.Name = "Left"
-    Left.Parent = BillboardGui
-    Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Left.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Left.BorderSizePixel = 0
-    Left.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
-    Left.Size = UDim2.new(0.0199999996, 0, 0.150000006, 0)
-
-    TopLeft.Name = "TopLeft"
-    TopLeft.Parent = BillboardGui
-    TopLeft.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    TopLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    TopLeft.BorderSizePixel = 0
-    TopLeft.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
-    TopLeft.Size = UDim2.new(0.200000003, 0, 0.00999999978, 0)
-
-    TopRight.Name = "TopRight"
-    TopRight.Parent = BillboardGui
-    TopRight.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    TopRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    TopRight.BorderSizePixel = 0
-    TopRight.Position = UDim2.new(0.600000024, 0, 0.0700000003, 0)
-    TopRight.Size = UDim2.new(0.200000003, 0, 0.00999999978, 0)
-
-    Right.Name = "Right"
-    Right.Parent = BillboardGui
-    Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Right.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Right.BorderSizePixel = 0
-    Right.Position = UDim2.new(0.800000012, 0, 0.0700000003, 0)
-    Right.Size = UDim2.new(0.0199999996, 0, 0.150000006, 0)
-
-    BottomLeft.Name = "BottomLeft"
-    BottomLeft.Parent = BillboardGui
-    BottomLeft.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    BottomLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    BottomLeft.BorderSizePixel = 0
-    BottomLeft.Position = UDim2.new(0.200000003, 0, 0.699999988, 0)
-    BottomLeft.Size = UDim2.new(0.0199999996, 0, 0.150000006, 0)
-
-    BottomBottomRight.Name = "BottomBottomRight"
-    BottomBottomRight.Parent = BillboardGui
-    BottomBottomRight.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    BottomBottomRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    BottomBottomRight.BorderSizePixel = 0
-    BottomBottomRight.Position = UDim2.new(0.620000005, 0, 0.850000024, 0)
-    BottomBottomRight.Size = UDim2.new(0.200000003, 0, 0.00999999978, 0)
-
-    BottomBottomLeft.Name = "BottomBottomLeft"
-    BottomBottomLeft.Parent = BillboardGui
-    BottomBottomLeft.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    BottomBottomLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    BottomBottomLeft.BorderSizePixel = 0
-    BottomBottomLeft.Position = UDim2.new(0.200000003, 0, 0.850000024, 0)
-    BottomBottomLeft.Size = UDim2.new(0.200000003, 0, 0.00999999978, 0)
-
-    BottomRight.Name = "BottomRight"
-    BottomRight.Parent = BillboardGui
-    BottomRight.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    BottomRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    BottomRight.BorderSizePixel = 0
-    BottomRight.Position = UDim2.new(0.800000012, 0, 0.699999988, 0)
-    BottomRight.Size = UDim2.new(0.0199999996, 0, 0.150000006, 0)
+    Frame.Parent = BillboardGui
+    Frame.BackgroundColor3 = _G.FeatureTable.Visuals.FilledColor
+    Frame.BackgroundTransparency = 1.000
+    Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Frame.BorderSizePixel = 0
+    Frame.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
+    Frame.Size = UDim2.new(0.699999988, 0, 0.800000012, 0)
+    Frame.BackgroundTransparency = 0.5
 
 end
 
@@ -386,15 +403,8 @@ VisualsSection:AddToggle('FilledESP', {
     Callback = function(value)
         _G.FeatureTable.Visuals.FilledESP = value
         for i,GetESP in pairs(StorageFolder:GetChildren()) do
-            if GetESP:IsA("BillboardGui") and GetESP.Name == "FpsBooster" then
-                local FindFrame = GetESP:FindFirstChildOfClass("Frame")
-                if FindFrame then
-                    if value then
-                        FindFrame.BackgroundTransparency = 0.5
-                    else
-                        FindFrame.BackgroundTransparency = 1
-                    end
-                end
+            if GetESP:IsA("BillboardGui") and GetESP.Name == "FpsBooster3" then
+                GetESP.Enabled = value
             end
         end
     end
@@ -589,12 +599,14 @@ for i,GetAllPlayers in pairs(game.Players:GetPlayers()) do
         if GetAllPlayers.Character then
             CreateBox(GetAllPlayers.Character.HumanoidRootPart)
             CreateCornerBox(GetAllPlayers.Character.HumanoidRootPart)
+            CreateFill(GetAllPlayers.Character.HumanoidRootPart)
         end
     
         GetAllPlayers.CharacterAdded:Connect(function(character)
             wait(2)
             CreateBox(character.HumanoidRootPart)
             CreateCornerBox(character.HumanoidRootPart)
+            CreateFill(character.HumanoidRootPart)
         end)
     end
 end
@@ -603,11 +615,13 @@ game.Players.PlayerAdded:Connect(function(player)
     wait(2)
     CreateBox(player.Character.HumanoidRootPart)
     CreateCornerBox(player.Character.HumanoidRootPart)
+    CreateFill(player.Character.HumanoidRootPart)
 
     player.CharacterAdded:Connect(function(character)
-        wait(2)
+        wait(0.5)
         CreateBox(character.HumanoidRootPart)
         CreateCornerBox(character.HumanoidRootPart)
+        CreateFill(character.HumanoidRootPart)
     end)
 end)
 
@@ -652,7 +666,7 @@ RunService.RenderStepped:Connect(function()
 end)
 
 game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
-    wait(2)
+    wait(0.5)
     _G.FeatureTable.Other.CurrentAnimation = nil
 end)
 
