@@ -67,7 +67,7 @@ function GetClosestPlayer()
     local ClosestPlayer
 
     for i, GetPlayers in pairs(game.Players:GetPlayers()) do
-        if GetPlayers.Character:FindFirstChild("HumanoidRootPart") and GetPlayers.Character:FindFirstChildOfClass("Humanoid") and not (GetPlayers.Name == game.Players.LocalPlayer.Name) then
+        if GetPlayers.Character and GetPlayers.Character:FindFirstChildOfClass("Humanoid") and not (GetPlayers.Name == game.Players.LocalPlayer.Name) then
             local ScreenPoint = workspace.CurrentCamera:WorldToScreenPoint(GetPlayers.Character[_G.FeatureTable.Combat.CurrentHitbox].Position)
             local Dist = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
             if Dist < _G.FeatureTable.Combat.FOVCircleRadius * 2 then
