@@ -1,7 +1,11 @@
 local repo = 'https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/'
+local SiriusSenseESP = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Sirius/request/library/sense/source.lua'))()
+
+SiriusSenseESP.teamSettings.enemy.enabled = true
 
 -- This script was made by @dementia enjoyer / eldmonstret
 -- Fully unobfuscated, have fun skidding :D
+-- Credits to shlexware for esp
 
 local UserInputService = game:GetService("UserInputService")
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
@@ -44,13 +48,8 @@ _G.FeatureTable = { -- table for our variables
         AimbotBind = Enum.KeyCode.Q,
     },
     Visuals = {
-        BoxESP = false,
-        CornerESP = false,
-        FilledESP = false,
-        FilledColor = Color3.fromRGB(255,255,255),
-        BoxThickness = 1,
-        BoxColor = Color3.fromRGB(255,255,255),
-        CornerColor = Color3.fromRGB(255,255,255),
+        BoxEnabled = false,
+        BoxType = "2D",
     },
     Other = {
         AimbotHold = false,
@@ -68,7 +67,7 @@ function GetClosestPlayer()
     local ClosestPlayer
 
     for i, GetPlayers in pairs(game.Players:GetPlayers()) do
-        if GetPlayers.Character and GetPlayers.Character:FindFirstChildOfClass("Humanoid") and not (GetPlayers.Name == game.Players.LocalPlayer.Name) then
+        if GetPlayers.Character:FindFirstChild("HumanoidRootPart") and GetPlayers.Character:FindFirstChildOfClass("Humanoid") and not (GetPlayers.Name == game.Players.LocalPlayer.Name) then
             local ScreenPoint = workspace.CurrentCamera:WorldToScreenPoint(GetPlayers.Character[_G.FeatureTable.Combat.CurrentHitbox].Position)
             local Dist = (Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y) - Vector2.new(ScreenPoint.X, ScreenPoint.Y)).Magnitude
             if Dist < _G.FeatureTable.Combat.FOVCircleRadius * 2 then
@@ -82,142 +81,29 @@ function GetClosestPlayer()
     return ClosestPlayer
 end
 
-function CreateBox(part)
-    local BillboardGui = Instance.new("BillboardGui", StorageFolder)
-    BillboardGui.Name = "FpsBooster"
-    local Frame = Instance.new("Frame")
-
-    BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    BillboardGui.Enabled = _G.FeatureTable.Visuals.BoxESP
-    BillboardGui.Active = true
-    BillboardGui.AlwaysOnTop = true
-    BillboardGui.LightInfluence = 1.000
-    BillboardGui.Size = UDim2.new(4, 0, 7, 0)
-    BillboardGui.Adornee = part
-
-    Frame.Parent = BillboardGui
-    Frame.BackgroundTransparency = 1.000
-    Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Frame.BorderSizePixel = 0
-    Frame.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
-    Frame.Size = UDim2.new(0.699999988, 0, 0.800000012, 0)
-
-    local UIStroke = Instance.new("UIStroke", Frame)
-    UIStroke.LineJoinMode = "Miter"
-    UIStroke.Color = _G.FeatureTable.Visuals.BoxColor
-    UIStroke.Thickness = _G.FeatureTable.Visuals.BoxThickness
-    UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
-end
-
-function CreateCornerBox(part)
-
-	local BillboardGui = Instance.new("BillboardGui", StorageFolder)
-	local Left = Instance.new("Frame")
-	local TopLeft = Instance.new("Frame")
-	local TopRight = Instance.new("Frame")
-	local Right = Instance.new("Frame")
-	local BottomLeft = Instance.new("Frame")
-	local BottomBottomRight = Instance.new("Frame")
-	local BottomBottomLeft = Instance.new("Frame")
-	local BottomRight = Instance.new("Frame")
-
-	BillboardGui.Active = true
-	BillboardGui.Adornee = part
-	BillboardGui.AlwaysOnTop = true
-	BillboardGui.LightInfluence = 1.000
-	BillboardGui.Size = UDim2.new(4, 0, 7, 0)
-    BillboardGui.Name = "FpsBooster2"
-    BillboardGui.Enabled = _G.FeatureTable.Visuals.CornerESP
-
-	Left.Name = "Left"
-	Left.Parent = BillboardGui
-	Left.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
-	Left.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Left.BorderSizePixel = 0
-	Left.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
-	Left.Size = UDim2.new(0.0250000004, 0, 0.150000006, 0)
-
-	TopLeft.Name = "TopLeft"
-	TopLeft.Parent = BillboardGui
-	TopLeft.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
-	TopLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	TopLeft.BorderSizePixel = 0
-	TopLeft.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
-	TopLeft.Size = UDim2.new(0.200000003, 0, 0.0149999997, 0)
-
-	TopRight.Name = "TopRight"
-	TopRight.Parent = BillboardGui
-	TopRight.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
-	TopRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	TopRight.BorderSizePixel = 0
-	TopRight.Position = UDim2.new(0.600000024, 0, 0.0700000003, 0)
-	TopRight.Size = UDim2.new(0.200000003, 0, 0.0149999997, 0)
-
-	Right.Name = "Right"
-	Right.Parent = BillboardGui
-	Right.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
-	Right.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	Right.BorderSizePixel = 0
-	Right.Position = UDim2.new(0.800000012, 0, 0.0700000003, 0)
-	Right.Size = UDim2.new(0.0250000004, 0, 0.150000006, 0)
-
-	BottomLeft.Name = "BottomLeft"
-	BottomLeft.Parent = BillboardGui
-	BottomLeft.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
-	BottomLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	BottomLeft.BorderSizePixel = 0
-	BottomLeft.Position = UDim2.new(0.200000003, 0, 0.699999988, 0)
-	BottomLeft.Size = UDim2.new(0.0250000004, 0, 0.150000006, 0)
-
-	BottomBottomRight.Name = "BottomBottomRight"
-	BottomBottomRight.Parent = BillboardGui
-	BottomBottomRight.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
-	BottomBottomRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	BottomBottomRight.BorderSizePixel = 0
-	BottomBottomRight.Position = UDim2.new(0.625, 0, 0.850000024, 0)
-	BottomBottomRight.Size = UDim2.new(0.200000003, 0, 0.0149999997, 0)
-
-	BottomBottomLeft.Name = "BottomBottomLeft"
-	BottomBottomLeft.Parent = BillboardGui
-	BottomBottomLeft.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
-	BottomBottomLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	BottomBottomLeft.BorderSizePixel = 0
-	BottomBottomLeft.Position = UDim2.new(0.200000003, 0, 0.850000024, 0)
-	BottomBottomLeft.Size = UDim2.new(0.200000003, 0, 0.0149999997, 0)
-
-	BottomRight.Name = "BottomRight"
-	BottomRight.Parent = BillboardGui
-	BottomRight.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
-	BottomRight.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	BottomRight.BorderSizePixel = 0
-	BottomRight.Position = UDim2.new(0.800000012, 0, 0.699999988, 0)
-	BottomRight.Size = UDim2.new(0.0250000004, 0, 0.150000006, 0)
-
-end
-
-function CreateFill(part)
-
-    local BillboardGui = Instance.new("BillboardGui", StorageFolder)
-    BillboardGui.Name = "FpsBooster3"
-    local Frame = Instance.new("Frame")
-
-    BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    BillboardGui.Enabled = _G.FeatureTable.Visuals.FilledESP
-    BillboardGui.Active = true
-    BillboardGui.AlwaysOnTop = true
-    BillboardGui.LightInfluence = 1.000
-    BillboardGui.Size = UDim2.new(4, 0, 7, 0)
-    BillboardGui.Adornee = part
-
-    Frame.Parent = BillboardGui
-    Frame.BackgroundColor3 = _G.FeatureTable.Visuals.FilledColor
-    Frame.BackgroundTransparency = 1.000
-    Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Frame.BorderSizePixel = 0
-    Frame.Position = UDim2.new(0.150000006, 0, 0.0700000003, 0)
-    Frame.Size = UDim2.new(0.699999988, 0, 0.800000012, 0)
-    Frame.BackgroundTransparency = 0.5
-
+function SiriusSenseESP.getWeapon(player)
+    local players = workspace:FindFirstChild("Players")
+    if players then
+        if players:FindFirstChild(player.Name) then
+            local Player = players[player.Name]
+            local FindTool = Player:FindFirstChildOfClass("Tool")
+            if FindTool then
+                return FindTool.Name
+            else
+                return "None"
+            end
+        end
+    else
+        local FindPlayer = workspace:FindFirstChild(player.Name)
+        if FindPlayer then
+            local FindTool = FindPlayer:FindFirstChildOfClass("Tool")
+            if FindTool then
+                return FindTool.Name
+            else
+                return "None"
+            end
+        end
+    end
 end
 
 local Tabs = {
@@ -370,126 +256,71 @@ VisualsSection:AddToggle('BoxESP', {
     Tooltip = 'Renders a box on all the players which is layered above all objects so you can see people through walls',
 
     Callback = function(value)
-        _G.FeatureTable.Visuals.BoxESP = value
-        for i,GetESP in pairs(StorageFolder:GetChildren()) do
-            if GetESP:IsA("BillboardGui") and GetESP.Name == "FpsBooster" then
-                GetESP.Enabled = _G.FeatureTable.Visuals.BoxESP
-            end
-        end
+        _G.FeatureTable.Visuals.BoxEnabled = value
     end
 })
 
-VisualsSection:AddToggle('CornerBoxESP', {
-    Text = 'Corner',
+VisualsSection:AddToggle('NameESP', {
+    Text = 'Name',
     Default = false,
-    Tooltip = 'Renders a box which only shows the corners',
+    Tooltip = 'Renders a text displaying a players name',
 
     Callback = function(value)
-        _G.FeatureTable.Visuals.CornerESP = value
-
-        for i,GetESP in pairs(StorageFolder:GetChildren()) do
-            if GetESP:IsA("BillboardGui") and GetESP.Name == "FpsBooster2" then
-                GetESP.Enabled = _G.FeatureTable.Visuals.CornerESP
-            end
-        end
+        SiriusSenseESP.teamSettings.enemy.name = value
     end
 })
 
-VisualsSection:AddToggle('FilledESP', {
-    Text = 'Filled Box',
+VisualsSection:AddToggle('DistanceESP', {
+    Text = 'Distance',
     Default = false,
-    Tooltip = 'Fills the box esp',
+    Tooltip = 'Renders a text displaying the players distance in studs',
 
     Callback = function(value)
-        _G.FeatureTable.Visuals.FilledESP = value
-        for i,GetESP in pairs(StorageFolder:GetChildren()) do
-            if GetESP:IsA("BillboardGui") and GetESP.Name == "FpsBooster3" then
-                GetESP.Enabled = value
-            end
-        end
+        SiriusSenseESP.teamSettings.enemy.distance = value
     end
 })
 
-VisualsSection:AddLabel('Box Color'):AddColorPicker('BoxESPColor', {
+VisualsSection:AddToggle('WeaponESP', {
+    Text = 'Weapon',
+    Default = false,
+    Tooltip = 'Renders a text displaying a players current weapon / tool',
+
+    Callback = function(value)
+        SiriusSenseESP.teamSettings.enemy.weapon = value
+    end
+})
+
+VisualsSection:AddToggle('HealthbarESP', {
+    Text = 'Healthbar',
+    Default = false,
+    Tooltip = 'Renders a bar which displays a players health on the Y axis',
+
+    Callback = function(value)
+        SiriusSenseESP.teamSettings.enemy.healthBar = value
+    end
+})
+
+VisualsSection:AddLabel('Box ESP Color'):AddColorPicker('Box Type', {
     Default = Color3.fromRGB(255, 255, 255),
     Title = 'Box Color',
     Transparency = 0,
 
     Callback = function(Value)
-        _G.FeatureTable.Visuals.BoxColor = Value
-
-        for i,GetESP in pairs(StorageFolder:GetChildren()) do
-            if GetESP:IsA("BillboardGui") and GetESP.Name == "FpsBooster" then
-                local FindMainFrame = GetESP:FindFirstChildOfClass("Frame")
-                if FindMainFrame then
-                    FindMainFrame:FindFirstChildOfClass("UIStroke").Color = _G.FeatureTable.Visuals.BoxColor
-                end
-            end
-        end 
+        SiriusSenseESP.teamSettings.enemy.boxColor[1] = Value
+        SiriusSenseESP.teamSettings.enemy.box3dColor[1] = Value
     end
 })
 
-VisualsSection:AddLabel('Corner Box Color'):AddColorPicker('CornerESPColor', {
-    Default = Color3.fromRGB(255, 255, 255),
-    Title = 'Corner Box Color',
-    Transparency = 0,
-
-    Callback = function(Value)
-        _G.FeatureTable.Visuals.CornerColor = Value
-
-        for i,GetESP in pairs(StorageFolder:GetChildren()) do
-            if GetESP:IsA("BillboardGui") and GetESP.Name == "FpsBooster2" then
-                local FindMainFrame = GetESP:FindFirstChildOfClass("Frame")
-                if FindMainFrame then
-                    for i,GetAllFrames in pairs(GetESP:GetChildren()) do
-                        if GetAllFrames:IsA("Frame") then
-                            GetAllFrames.BackgroundColor3 = _G.FeatureTable.Visuals.CornerColor
-                        end
-                    end
-                end
-            end
-        end 
-    end
-})
-
-VisualsSection:AddLabel('Fill Color'):AddColorPicker('FillESPColor', {
-    Default = Color3.fromRGB(255, 255, 255),
-    Title = 'Fill Color',
-    Transparency = 0,
-
-    Callback = function(Value)
-        _G.FeatureTable.Visuals.FilledColor = Value
-
-        for i,GetESP in pairs(StorageFolder:GetChildren()) do
-            if GetESP:IsA("BillboardGui") and GetESP.Name == "FpsBooster" then
-                local FindFrame = GetESP:FindFirstChildOfClass("Frame")
-                if FindFrame then
-                    FindFrame.BackgroundColor3 = Value
-                end
-            end
-        end
-    end
-})
-
-VisualsSection:AddSlider('BoxThicknessSlider', {
-    Text = 'Box Thickness',
+VisualsSection:AddDropdown('Box Type', {
+    Values = { '2D', '3D' },
     Default = 1,
-    Min = 1,
-    Max = 10,
-    Rounding = 1,
-    Compact = false,
+    Multi = false,
+
+    Text = 'Box Type',
+    Tooltip = 'Customizable box type & demension',
 
     Callback = function(value)
-        _G.FeatureTable.Visuals.BoxThickness = value
-
-        for i,GetESP in pairs(StorageFolder:GetChildren()) do
-            if GetESP:IsA("BillboardGui") and GetESP.Name == "FpsBooster" then
-                local FindMainFrame = GetESP:FindFirstChildOfClass("Frame")
-                if FindMainFrame then
-                    FindMainFrame:FindFirstChildOfClass("UIStroke").Thickness = _G.FeatureTable.Visuals.BoxThickness
-                end
-            end
-        end 
+        _G.FeatureTable.Visuals.BoxType = value
     end
 })
 
@@ -594,37 +425,6 @@ UserInputService.InputEnded:Connect(function(Input)
     end
 end)
 
-for i,GetAllPlayers in pairs(game.Players:GetPlayers()) do
-    if not (GetAllPlayers == game.Players.LocalPlayer) then
-        if GetAllPlayers.Character then
-            CreateBox(GetAllPlayers.Character.HumanoidRootPart)
-            CreateCornerBox(GetAllPlayers.Character.HumanoidRootPart)
-            CreateFill(GetAllPlayers.Character.HumanoidRootPart)
-        end
-    
-        GetAllPlayers.CharacterAdded:Connect(function(character)
-            wait(2)
-            CreateBox(character.HumanoidRootPart)
-            CreateCornerBox(character.HumanoidRootPart)
-            CreateFill(character.HumanoidRootPart)
-        end)
-    end
-end
-
-game.Players.PlayerAdded:Connect(function(player)
-    wait(2)
-    CreateBox(player.Character.HumanoidRootPart)
-    CreateCornerBox(player.Character.HumanoidRootPart)
-    CreateFill(player.Character.HumanoidRootPart)
-
-    player.CharacterAdded:Connect(function(character)
-        wait(0.5)
-        CreateBox(character.HumanoidRootPart)
-        CreateCornerBox(character.HumanoidRootPart)
-        CreateFill(character.HumanoidRootPart)
-    end)
-end)
-
 RunService.RenderStepped:Connect(function()
     if _G.FeatureTable.Combat.HealthCheck then
         if _G.FeatureTable.Other.Target ~= nil then
@@ -663,6 +463,19 @@ RunService.RenderStepped:Connect(function()
     FOVCircle.Position = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
     FOVCircle.Radius = _G.FeatureTable.Combat.FOVCircleRadius * 2.2
     FOVCircle.Color = _G.FeatureTable.Combat.FOVCircleColor
+
+    if _G.FeatureTable.Visuals.BoxEnabled then
+        if _G.FeatureTable.Visuals.BoxType == "2D" then
+            SiriusSenseESP.teamSettings.enemy.box = true
+            SiriusSenseESP.teamSettings.enemy.box3d = false
+        else
+            SiriusSenseESP.teamSettings.enemy.box = false
+            SiriusSenseESP.teamSettings.enemy.box3d = true
+        end
+    else
+        SiriusSenseESP.teamSettings.enemy.box = false
+        SiriusSenseESP.teamSettings.enemy.box3d = false
+    end
 end)
 
 game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
@@ -689,3 +502,5 @@ SaveManager:SetFolder('eclipse/dahood')
 SaveManager:BuildConfigSection(Tabs['UI Settings'])
 ThemeManager:ApplyToTab(Tabs['UI Settings'])
 SaveManager:LoadAutoloadConfig()
+
+SiriusSenseESP.Load() -- load esp module, credits to shlexware
